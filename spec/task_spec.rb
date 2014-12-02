@@ -13,6 +13,9 @@ describe Task do
 		end
 
 		it "saves to a task file" do
+			@task.save
+
+			expect(File.exists?("#{Dir.home}/.tasks/objective.task")).to eq(true)
 		end
 	end
 end

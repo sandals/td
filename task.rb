@@ -1,3 +1,5 @@
+require 'json'
+
 class Task
 	attr_accessor :objective
 
@@ -7,7 +9,14 @@ class Task
 
 	def save
 		if @objective.nil? or @objective.empty?
-			false
+			return false
 		end
+
+		File.open("#{Dir.home}/.tasks/#{@objective}.task", "w")	do |file|
+			content = { objective: @objective }
+			file.write(JSON.generate(content))
+		end
+
+		true
 	end
 end
